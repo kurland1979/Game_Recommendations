@@ -1,0 +1,36 @@
+# Data files (large files - stored in Google Drive)
+data/users.csv
+data/recommendations.csv
+*.csv
+!data/games.csv
+
+# Model files
+*.txt
+*.pkl
+*.joblib
+*.h5
+
+# Output files
+*.png
+outputs/
+!outputs/README.md
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

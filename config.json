@@ -1,0 +1,64 @@
+{
+  "paths": {
+    "games_file": "/home/kurland/recommendation_system/games.csv",
+    "recommendations_file": "/home/kurland/recommendation_system/recommendations.csv",
+    "users_file": "/home/kurland/recommendation_system/users.csv",
+    "sample": 5000000
+  },
+  "baseline":{
+    "k":40,
+    "threshold":40,
+    "top_n": 20,
+    "item_idx":123
+  },
+
+  "kflod":{
+    "n_splits":5,
+    "shuffle":true,
+    "random_state": 42
+      },
+
+  "lightfm_no_features":{
+    "no_components":50,
+      "loss":"warp",
+      "learning_rate":0.001,
+      "epochs":50,
+      "user_alpha":1e-5,
+      "item_alpha":1e-5,
+      "num_threads": 4,
+      "k":50,
+      "random_state": 42},
+
+  "lightfm_with_features":{
+      "no_components":50,
+      "loss":"warp",
+      "learning_rate":0.01,
+      "epochs":50,
+      "user_alpha":1e-5,
+      "item_alpha":1e-5,
+      "num_threads": 4,
+      "k":20,
+      "random_state": 42},
+
+  "lightgbm": {
+      "objective": "binary",
+      "metric": "auc",
+      "boosting_type": "gbdt",
+      "num_leaves": 50,
+      "learning_rate": 0.009,
+      "feature_fraction": 0.9,
+      "bagging_fraction": 0.8,
+      "bagging_freq": 5,
+      "verbose": 1,
+      "seed": 42,
+      "num_boost_round": 1000,
+      "early_stopping_rounds": 100,
+      "log_evaluation": 50,
+      "k":30
+    },
+    "recommendations":{
+      "threshold":0.7,
+      "top_n": 5,
+      "user_id":12916407
+    }
+}
