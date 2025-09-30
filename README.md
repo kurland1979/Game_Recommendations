@@ -6,6 +6,17 @@ The goal of this project was to build a reliable recommendation system for Steam
 
 On a personal note, the purpose was also to **work with large-scale data and real-world challenges**, strengthening my skills in Machine Learning and building industry-like pipelines.
 
+# 🎮 Steam Game Recommendation System
+
+A comprehensive recommendation system for Steam games, comparing multiple algorithms including collaborative filtering, matrix factorization, and gradient boosting.
+
+## 🚀 Quick Start
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/kurland1979/Game_Recommendations.git
+cd Game_Recommendations
+
 ## 📂 Dataset
 
 Source: [Kaggle – Steam Game Recommendations](https://www.kaggle.com/datasets)
