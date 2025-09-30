@@ -26,13 +26,12 @@ The full dataset is uploaded to Google Drive for those who wish to run it on the
 
 ### 📥 Download Data Files
 
-The large dataset files are stored on Google Drive:
+The large dataset files are stored on Google Drive. Download manually and place in the `data/` directory:
 
-**users.csv (185 MB):**  
-https://drive.google.com/file/d/1loW5XkftMqZNbeoDFlAs9uQODkzYqLui/view?usp=sharing
-
-**recommendations.csv (1.88 GB):**  
-https://drive.google.com/file/d/1AQGA9fiK8XvJaFfyBO-jrynNZ2NpRsoJ/view?usp=sharing
+| File | Size | Link |
+|------|------|------|
+| users.csv | 185 MB | [Click here to download](https://drive.google.com/file/d/1loW5XkftMqZNbeoDFlAs9uQODkzYqLui/view?usp=sharing) |
+| recommendations.csv | 1.88 GB | [Click here to download](https://drive.google.com/file/d/1AQGA9fiK8XvJaFfyBO-jrynNZ2NpRsoJ/view?usp=sharing) |
 
 After downloading, place both files in the `data/` directory.
 
