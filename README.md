@@ -25,12 +25,16 @@ Due to hardware limitations, the final run was executed on **5 million rows**.
 The full dataset is uploaded to Google Drive for those who wish to run it on the complete 10M rows.
 
 ### 📥 Download Data Files
-The large dataset files are stored on Google Drive. Download them here:
 
-- **users.csv** (185 MB) - [Download from Google Drive](https://drive.google.com/file/d/1loW5XkftMqZNbeoDFlAs9uQODkzYqLui/view?usp=sharing)
-- **recommendations.csv** (1.88 GB) - [Download from Google Drive](https://drive.google.com/file/d/1AQGA9fiK8XvJaFfyBO-jrynNZ2NpRsoJ/view?usp=sharing)
+The large dataset files are stored on Google Drive:
 
-**After downloading:** Place both files in the `data/` directory of the project.
+**users.csv (185 MB):**  
+https://drive.google.com/file/d/1loW5XkftMqZNbeoDFlAs9uQODkzYqLui/view?usp=sharing
+
+**recommendations.csv (1.88 GB):**  
+https://drive.google.com/file/d/1AQGA9fiK8XvJaFfyBO-jrynNZ2NpRsoJ/view?usp=sharing
+
+After downloading, place both files in the `data/` directory.
 
 ### Main files:
 
