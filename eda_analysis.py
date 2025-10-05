@@ -4,7 +4,7 @@ from merge_files import pipeline_merge
 import matplotlib.pyplot as plt
 
 
-def eda_games(df, verboss=False):
+def eda_games(df, verbose=False):
     """
     Performs exploratory data analysis (EDA) on the games dataset.
 
@@ -15,7 +15,7 @@ def eda_games(df, verboss=False):
     ----------
     df : pandas.DataFrame
         DataFrame containing games data with a 'date_release' column.
-    verboss : bool, optional (default=False)
+    verbose : bool, optional (default=False)
         If True, prints descriptive statistics and summary results.
 
     Returns
@@ -32,7 +32,7 @@ def eda_games(df, verboss=False):
                                                 'positive_ratio':'mean',
                                                     'user_reviews':'mean'
                                                 }).round(2)
-        if verboss:
+        if verbose:
             print('Num_App: ',df['app_id'].nunique())
             print ('\nRange Min/Max For Date Release From: ',df['date_release'].dt.year.min(), "To", df['date_release'].dt.year.max())
             print('\nResult Per Year:\n', results)
@@ -91,7 +91,7 @@ def positive_per_year_plot(results):
     plt.savefig("positive_per_year.png")
     plt.close()
 
-def eda_recommendations(df, verboss=False):
+def eda_recommendations(df, verbose=False):
     """
     Performs exploratory data analysis (EDA) on the recommendations dataset.
 
@@ -105,7 +105,7 @@ def eda_recommendations(df, verboss=False):
     ----------
     df : pandas.DataFrame
         DataFrame containing recommendations data with 'hours' and 'is_recommended'.
-    verboss : bool, optional (default=False)
+    verbose : bool, optional (default=False)
         If True, prints distributions and aggregated statistics.
 
     Returns
@@ -128,7 +128,7 @@ def eda_recommendations(df, verboss=False):
                 'is_recommended': 'mean'   
             }).round(2)
         
-        if verboss:
+        if verbose:
             print('\nCount Recommended:\n',df['is_recommended'].value_counts(normalize=True))
             print(results_per_hours)
         return results_per_hours
@@ -163,7 +163,7 @@ def eda_recommendations_plot(results_per_hours):
     plt.savefig("recommended_per_hours.png")
     plt.close()
   
-def eda_users(df, verboss=False):
+def eda_users(df, verbose=False):
     """
     Performs exploratory data analysis (EDA) on the users dataset.
 
@@ -175,7 +175,7 @@ def eda_users(df, verboss=False):
     ----------
     df : pandas.DataFrame
         DataFrame containing user data with 'reviews', 'products', and 'is_recommended'.
-    verboss : bool, optional (default=False)
+    verbose : bool, optional (default=False)
         If True, prints descriptive statistics, ratio of invalid users,
         and aggregated results.
 
@@ -194,7 +194,7 @@ def eda_users(df, verboss=False):
     results_per_product= df.groupby('products_bin')['is_recommended'].mean().round(2)
                                          
     try:
-        if verboss:
+        if verbose:
             print('\nDescribe_Products:\n',df['products'].describe())
             print('\nDescribe_Reviews:\n',df['reviews'].describe())
             invalid_mask = df['reviews'] > df['products']
@@ -225,12 +225,12 @@ def pipeline_eda():
     """
 
     df = pipeline_merge()
-    results = eda_games(df,verboss=False)
+    results = eda_games(df,verbose=False)
     games_per_year_plot(results)
     positive_per_year_plot(results)
-    results_per_hours = eda_recommendations(df,verboss=False)
+    results_per_hours = eda_recommendations(df,verbose=False)
     eda_recommendations_plot(results_per_hours)
-    eda_users(df,verboss=False)
+    eda_users(df,verbose=False)
 
 
 
