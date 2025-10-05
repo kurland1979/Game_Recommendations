@@ -207,7 +207,7 @@ def evaluate(val_df, algo, user_features_matrix, item_features_matrix, k=LIGHT_W
             }
     return results
 
-def pipeline_lightfm_features(verboss=False):
+def pipeline_lightfm_features(verbose=False):
     """
     Full LightFM pipeline with user and item features.
 
@@ -222,7 +222,7 @@ def pipeline_lightfm_features(verboss=False):
     - Evaluate performance on both validation and test sets.
 
     Args:
-        verboss (bool, optional): If True, prints debug information 
+        verbose (bool, optional): If True, prints debug information 
             about data shapes, transformations, and matrices. Defaults to False.
 
     Returns:
@@ -242,27 +242,27 @@ def pipeline_lightfm_features(verboss=False):
     if verboss:
         print("After drop_duplicates:", df.shape)
 
-    train_df, val_df, test_df = split_train_val_test(df,verboss=False)
+    train_df, val_df, test_df = split_train_val_test(df,verbose=False)
     
     train_df,prod_bins, rev_bins,bins_price,labels_price,positive_bins,positive_labels = bins(train_df,
-                                                                                              verboss=False)
+                                                                                              verbose=False)
     val_df, test_df = bins_apply(val_df, test_df,prod_bins,rev_bins,bins_price,
                                  labels_price,positive_bins,positive_labels,                              
-                                 verboss=False)
+                                 verbose=False)
 
     train_df, val_df, test_df = map_indices(train_df, val_df, test_df)
     cold_start_users_val, cold_start_items_val, cold_start_users_test, cold_start_items_test = check_cold_start(train_df,
                                                                                                     val_df,
                                                                                                     test_df,
-                                                                                                    verboss=False)
+                                                                                                    verbose=False)
 
     val_df, test_df = filter_cold_start(val_df, test_df,
                         cold_start_users_val, cold_start_items_val,
-                        cold_start_users_test, cold_start_items_test,verboss=False)
+                        cold_start_users_test, cold_start_items_test,verbose=False)
 
     interactions_train,user_features_matrix,item_features_matrix = build_interactions_features(train_df)
     algo,train_time = train_lightfm_features(interactions_train,user_features_matrix,item_features_matrix)
-    if verboss:
+    if verbose:
         print('matrix train:',interactions_train.shape)
         print('matrix users',user_features_matrix.shape)
         print('matrix items',item_features_matrix.shape)
