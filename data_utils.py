@@ -44,7 +44,7 @@ def add_categorical_features(df):
     return df
 
 
-def split_train_val_test(df, method="time",verboss=False):
+def split_train_val_test(df, method="time",verbose=False):
     """
     Splits dataset into train/val/test.
     method : str
@@ -74,12 +74,12 @@ def split_train_val_test(df, method="time",verboss=False):
 
     else:
         raise ValueError("ERROR: method not identified")
-    if verboss:
+    if verbose:
         print("Train:", train_df.shape, "Val:", val_df.shape, "Test:", test_df.shape)
 
     return train_df, val_df, test_df
 
-def bins(train_df, verboss=False):
+def bins(train_df, verbose=False):
     """
     Apply binning transformations to numeric features for model compatibility.
 
@@ -137,7 +137,7 @@ def bins(train_df, verboss=False):
             train_df['products'], q=5, duplicates='drop', retbins=True
     )
     
-    if verboss:
+    if verbose:
         print("Value Counts Products: ",train_df['products_bin'].value_counts())
         print("Value Counts Reviews: ",train_df['reviews_bin'].value_counts())
         print("Value Counts Price: ", train_df['price_bin'].value_counts())
@@ -153,7 +153,7 @@ def bins(train_df, verboss=False):
                         
 
 def bins_apply(val_df, test_df, prod_bins, rev_bins, bins_price, labels_price,
-               positive_bins, positive_labels, verboss=False):
+               positive_bins, positive_labels, verbose=False):
     """
     Apply consistent binning to validation and test sets.
 
@@ -197,7 +197,7 @@ def bins_apply(val_df, test_df, prod_bins, rev_bins, bins_price, labels_price,
     val_df['positive_ratio_bin'] = pd.cut(val_df['positive_ratio'],bins=positive_bins,labels=positive_labels,include_lowest=True)
     test_df['positive_ratio_bin'] = pd.cut(test_df['positive_ratio'],bins=positive_bins,labels=positive_labels,include_lowest=True)
 
-    if verboss:
+    if verbose:
         print("Miss Values Products Val: ",val_df['products_bin'].isna().sum())
         print("Miss Values Products Test: ",test_df['products_bin'].isna().sum())
 
@@ -260,7 +260,7 @@ def map_indices(train_df, val_df, test_df):
     return train_df, val_df, test_df
 
 
-def check_cold_start(train_df, val_df, test_df, verboss=False):
+def check_cold_start(train_df, val_df, test_df, verbose=False):
     """
     Identifies cold-start users and items in val and test sets.
     """
@@ -276,7 +276,7 @@ def check_cold_start(train_df, val_df, test_df, verboss=False):
     cold_start_users_test = users_test - users_train
     cold_start_items_test = items_test - items_train
 
-    if verboss:
+    if verbose:
         print("Cold start users val:", len(cold_start_users_val))
         print("Cold start items val:", len(cold_start_items_val))
         print("Cold start users test:", len(cold_start_users_test))
@@ -286,7 +286,7 @@ def check_cold_start(train_df, val_df, test_df, verboss=False):
 
 def filter_cold_start(val_df, test_df,
                       cold_start_users_val, cold_start_items_val,
-                      cold_start_users_test, cold_start_items_test,verboss=False):
+                      cold_start_users_test, cold_start_items_test,verbose=False):
     """
     Removes cold-start users and items from the validation and test sets.
 
@@ -322,7 +322,7 @@ def filter_cold_start(val_df, test_df,
         ~test_df['user_idx'].isin(cold_start_users_test) &
         ~test_df['item_idx'].isin(cold_start_items_test)
     ]
-    if verboss:
+    if verbose:
         print("Val after filter:", val_df.shape, "Test after filter:", test_df.shape)
 
     return val_df, test_df
