@@ -6,7 +6,7 @@ from get_files import pipeline_files
 games_df,recoms_df,users_df = pipeline_files()
 dataframes = [(games_df,'Games'), (recoms_df,'Recommendations'), (users_df,'Users')]
 
-def check_dataframe(dataframes, verboss=False):
+def check_dataframe(dataframes, verbose=False):
     """
     Runs general checks on a list of DataFrames.
 
@@ -14,7 +14,7 @@ def check_dataframe(dataframes, verboss=False):
     ----------
     dataframes : list of tuple
         List of (DataFrame, name) tuples to be checked.
-    verboss : bool, optional (default=False)
+    verbose : bool, optional (default=False)
         If True, prints shape, missing values, duplicates, 
         descriptive statistics, and dtypes for each DataFrame.
 
@@ -28,7 +28,7 @@ def check_dataframe(dataframes, verboss=False):
     if not dataframes:
         raise DataError("No dataframes provided")
     try:
-        if verboss:
+        if verbose:
             for df,name in dataframes:
                 print(f"--- Checks for {name} ---")
                 print("Shape:", df.shape)
@@ -40,7 +40,7 @@ def check_dataframe(dataframes, verboss=False):
     except Exception as e:
         print(f'Error: {e}')
 
-def check_games_file(games_df, verboss=False):
+def check_games_file(games_df, verbose=False):
     """
     Performs quality checks on the games dataset.
 
@@ -48,7 +48,7 @@ def check_games_file(games_df, verboss=False):
     ----------
     games_df : pandas.DataFrame
         DataFrame containing the games data.
-    verboss : bool, optional (default=False)
+    verbose : bool, optional (default=False)
         If True, prints counts, unique values, ranges, 
         and distributions of key columns.
 
@@ -61,7 +61,7 @@ def check_games_file(games_df, verboss=False):
     if games_df is None or games_df.empty:
         raise ValueError("Games DataFrame is not loaded or is empty")
     try:
-        if verboss:
+        if verbose:
             print("=== Games Data Checks ===")
             print("Unique app_id:", games_df['app_id'].nunique())
             print("Missing titles:", games_df['title'].isna().sum())
@@ -80,7 +80,7 @@ def check_games_file(games_df, verboss=False):
     except Exception as e:
         print(f'Error: {e}')
 
-def check_recommend_file(recoms_df, verboss=False):
+def check_recommend_file(recoms_df, verbose=False):
     """
     Performs quality checks on the recommendations dataset.
 
@@ -88,7 +88,7 @@ def check_recommend_file(recoms_df, verboss=False):
     ----------
     recoms_df : pandas.DataFrame
         DataFrame containing the recommendations data.
-    verboss : bool, optional (default=False)
+    verbose : bool, optional (default=False)
         If True, prints counts, ranges, distributions, 
         and missing values of key columns.
 
@@ -102,7 +102,7 @@ def check_recommend_file(recoms_df, verboss=False):
         raise ValueError("Recommendations DataFrame is not loaded or is empty")
         
     try:
-        if verboss:
+        if verbose:
             print("=== Recommend Data Checks ===")
             print("Unique review_id:", recoms_df['review_id'].nunique())
             print("Missing user_id:", recoms_df['user_id'].isna().sum())
@@ -117,7 +117,7 @@ def check_recommend_file(recoms_df, verboss=False):
     except Exception as e:
         print(f'Error: {e}')
 
-def check_users_file(users_df, verboss=False):
+def check_users_file(users_df, verbose=False):
     """
     Performs quality checks on the users dataset.
 
@@ -125,7 +125,7 @@ def check_users_file(users_df, verboss=False):
     ----------
     users_df : pandas.DataFrame
         DataFrame containing the users data.
-    verboss : bool, optional (default=False)
+    verbose : bool, optional (default=False)
         If True, prints unique user counts, ranges for 
         products and reviews, and checks for invalid cases 
         (reviews > products).
@@ -140,7 +140,7 @@ def check_users_file(users_df, verboss=False):
         raise ValueError("Users DataFrame is not loaded or is empty")
     
     try:
-        if verboss:
+        if verbose:
             print("=== Users Data Checks ===")
             print("Unique user_id:", users_df['user_id'].nunique())
             print("Products range:", users_df['products'].min(), "to", users_df['products'].max())
@@ -165,10 +165,10 @@ def pipeline_checks():
     None
     """
 
-    check_dataframe(dataframes,verboss=False)
-    check_games_file(games_df,verboss=False)
-    check_recommend_file(recoms_df,verboss=False)
-    check_users_file(users_df,verboss=True)
+    check_dataframe(dataframes,verbose=False)
+    check_games_file(games_df,verbose=False)
+    check_recommend_file(recoms_df,verbose=False)
+    check_users_file(users_df,verbose=True)
 
     
 
