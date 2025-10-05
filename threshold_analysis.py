@@ -139,7 +139,7 @@ def analyze_thresholds(algo, X_val, y_val):
 
     return df_thresholds
 
-def pipeline_thresholds(verboss=False):
+def pipeline_thresholds(verbose=False):
     """
     Run threshold analysis pipeline on the trained LightGBM model.
 
@@ -150,7 +150,7 @@ def pipeline_thresholds(verboss=False):
 
     Parameters
     ----------
-    verboss : bool, optional (default=False)
+    verbose : bool, optional (default=False)
         If True, prints the top 10 thresholds with the best F1-scores.
 
     Returns
@@ -167,8 +167,8 @@ def pipeline_thresholds(verboss=False):
     compute_roc_metrics(algo, X_val, y_val)
     pr_curve(algo, X_val, y_val)
     df_thresholds = analyze_thresholds(algo, X_val, y_val)
-    if verboss:
+    if verbose:
         print(df_thresholds.head(10))
 
 
-pipeline_thresholds(verboss=False)
+pipeline_thresholds(verbose=False)
