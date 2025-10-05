@@ -108,7 +108,7 @@ def feature_importance_plot(feature_importance):
     plt.savefig('feature_scores.png')
     plt.close()
 
-def pipeline_feature_importance(verboss=False):
+def pipeline_feature_importance(verbose=False):
     """
     Run the full pipeline for feature importance analysis.
 
@@ -123,7 +123,7 @@ def pipeline_feature_importance(verboss=False):
 
     Parameters
     ----------
-    verboss : bool, optional, default=False
+    verbose : bool, optional, default=False
         If True, print the feature importance table.
 
     Returns
@@ -134,7 +134,7 @@ def pipeline_feature_importance(verboss=False):
     """
 
     df = pipeline_merge()
-    train_df, val_df, test_df = split_train_val_test(df,verboss=False)
+    train_df, val_df, test_df = split_train_val_test(df,verbose=False)
     X_train,y_train = prepare_data(train_df)
     selected = selectkbest(X_train,y_train)
     feature_importance = run_feature_importance(selected,X_train)
