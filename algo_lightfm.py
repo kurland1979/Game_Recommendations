@@ -144,7 +144,7 @@ def evaluate(val_df, algo, k=LIGHT_K):
             }
     return results
 
-def pipeline_lightfm(verboss=False):
+def pipeline_lightfm(verbose=False):
     """
     Full pipeline to train and evaluate a LightFM recommendation model.
 
@@ -160,7 +160,7 @@ def pipeline_lightfm(verboss=False):
 
     Parameters
     ----------
-    verboss : bool, optional (default=False)
+    verbose : bool, optional (default=False)
         If True, prints shapes and progress information at each pipeline step.
 
     Returns
@@ -172,7 +172,7 @@ def pipeline_lightfm(verboss=False):
     """
 
     df = pipeline_merge()
-    if verboss:
+    if verbose:
         print("Merged DF shape:", df.shape)
 
     df = df.sort_values("date")
@@ -180,20 +180,20 @@ def pipeline_lightfm(verboss=False):
     if verboss:
         print("After drop_duplicates:", df.shape)
 
-    train_df, val_df, test_df = split_train_val_test(df,verboss=False)
+    train_df, val_df, test_df = split_train_val_test(df,verbose=False)
    
     train_df, val_df, test_df = map_indices(train_df, val_df, test_df)
     cold_start_users_val, cold_start_items_val, cold_start_users_test, cold_start_items_test = check_cold_start(train_df,
                                                                                                     val_df,
                                                                                                     test_df,
-                                                                                                    verboss=False)
+                                                                                                    verbose=False)
 
     val_df, test_df = filter_cold_start(val_df, test_df,
                         cold_start_users_val, cold_start_items_val,
-                        cold_start_users_test, cold_start_items_test,verboss=False)
+                        cold_start_users_test, cold_start_items_test,verbose=False)
 
     dataset, interactions_train = build_interactions(train_df)
-    if verboss:
+    if verbose:
         print("Interactions train:", interactions_train.shape)
         
     algo,train_time = train_lightfm(interactions_train)
