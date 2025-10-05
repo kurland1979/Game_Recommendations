@@ -85,7 +85,7 @@ def convert_date(df):
     
     return df
     
-def basic_checks(df, verboss=False):
+def basic_checks(df, verbose=False):
     """
     Runs basic checks on a DataFrame for validation.
 
@@ -93,7 +93,7 @@ def basic_checks(df, verboss=False):
     ----------
     df : pandas.DataFrame
         DataFrame to check.
-    verboss : bool, optional (default=False)
+    verbose : bool, optional (default=False)
         If True, prints descriptive statistics, shape, info, 
         duplicates count, and missing values.
 
@@ -106,7 +106,7 @@ def basic_checks(df, verboss=False):
     if df is None:
         raise DataError(" DataFrame not provided")
         
-    if verboss:
+    if verbose:
         print('Describe\n',df.describe())
         print('\nShape:', df.shape)
         print('\nInfo:\n',df.info())
@@ -134,6 +134,6 @@ def pipeline_merge():
     df = merge_files(games_df,recoms_df,users_df)
     df = map_columns(df)
     df = convert_date(df)
-    basic_checks(df,verboss=False)
+    basic_checks(df,verbose=False)
     
     return df
