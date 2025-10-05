@@ -101,7 +101,7 @@ def calculate_similarity(matrix):
 
     return similarity
 
-def top_similar_items(similarity, df, item_idx=ITEM_IDX, top_n=TOP_N, verboss=False):
+def top_similar_items(similarity, df, item_idx=ITEM_IDX, top_n=TOP_N, verbose=False):
     """
     Retrieves the top-N most similar items for a given item.
 
@@ -126,7 +126,7 @@ def top_similar_items(similarity, df, item_idx=ITEM_IDX, top_n=TOP_N, verboss=Fa
     sim_scores = similarity[item_idx]         
     similar_items = np.argsort(sim_scores)[::-1][1:top_n+1]  
     recommended_games = df[df['item_idx'].isin(similar_items)][['item_idx','app_id','title']].drop_duplicates()
-    if verboss:
+    if verbose:
         print(recommended_games)
     return similar_items
 
@@ -235,7 +235,7 @@ def pipeline_baseline_item_item_cf():
     cold_start_users_val, cold_start_items_val, cold_start_users_test, cold_start_items_test = check_cold_start(train_df,
                                                                                                     val_df,
                                                                                                     test_df,
-                                                                                                    verboss=False)
+                                                                                                    verbose=False)
 
     val_df, test_df = filter_cold_start(val_df, test_df,
                         cold_start_users_val, cold_start_items_val,
@@ -245,7 +245,7 @@ def pipeline_baseline_item_item_cf():
     start_time = time.time()
     similarity = calculate_similarity(matrix)
     train_time = time.time() - start_time
-    similar_items = top_similar_items(similarity,df, item_idx=ITEM_IDX, top_n=TOP_N,verboss=False)
+    similar_items = top_similar_items(similarity,df, item_idx=ITEM_IDX, top_n=TOP_N,verbose=False)
     results_val = evaluate_item_item_cf(train_df, val_df, similarity, k=10)
     results_test = evaluate_item_item_cf(train_df, test_df, similarity, k=10)
 
