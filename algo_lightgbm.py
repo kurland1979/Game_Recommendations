@@ -204,7 +204,7 @@ def pipeline_lightgbm():
     """
 
     df = pipeline_merge()
-    train_df,val_df,test_df = split_train_val_test(df,verboss=False)
+    train_df,val_df,test_df = split_train_val_test(df,verbose=False)
     X_train,y_train,X_val,y_val,X_test,y_test = prepare_data(train_df,val_df,test_df)
     trainset, valset = build_dataset(X_train,y_train,X_val,y_val)
     algo,train_time = train_algo(trainset,valset)
