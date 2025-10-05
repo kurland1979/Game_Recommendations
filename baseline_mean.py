@@ -206,7 +206,7 @@ def pipeline_baseline_mean():
 
     # 1. Load data
     df = pipeline_merge()
-    train_df, val_df,test_df = split_train_val_test(df,verboss=False)
+    train_df, val_df,test_df = split_train_val_test(df,verbose=False)
     train_df = train_df[['user_id', 'app_id', 'is_recommended']].copy()
 
     # 2. Compute means
